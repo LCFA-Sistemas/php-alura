@@ -9,6 +9,7 @@ class ProdutoRepositorio
 {
     private PDO $pdo;
 
+    //Na construção do objeto passa o PDO para a conexão com o banco de dados
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
     }
@@ -51,5 +52,24 @@ class ProdutoRepositorio
         return $dadosAlmoco;
     }
 
+    public function todosProdutos(): array
+    {
+        $sql ="SELECT * FROM produtos";
+        $statement = $this->pdo->query($sql);
+        $todosProdutos = $statement->fetchAll(PDO::FETCH_ASSOC); // Aqui é apenas um array
+
+
+        $todosDados = array_map(function ($produto)
+        {
+            return new Produto($produto['id'],
+                $produto['tipo'],
+                $produto['nome'],
+                $produto['descricao'],
+                $produto['imagem'],
+                $produto['preco']);
+        },$todosProdutos);
+
+        return $todosDados;
+    }
 
 }
