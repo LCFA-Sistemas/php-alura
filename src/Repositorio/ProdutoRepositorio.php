@@ -72,4 +72,12 @@ class ProdutoRepositorio
         return $todosDados;
     }
 
+    public function removerProduto(int $id)
+    {
+        $slq = "DELETE FROM produtos WHERE id = ?";
+        $statement = $this->pdo->prepare($slq);
+        $statement->bindValue(1,$id);
+
+        $statement->execute();
+    }
 }
