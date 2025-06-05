@@ -37,13 +37,13 @@ $todosProdutos = $produtos->todosProdutos();
     <h1>Admistração Serenatto</h1>
     <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
   </section>
-  <h2>Lista de Produtos</h2>
+  <h2>Lista de Produto</h2>
 
   <section class="container-table">
     <table>
       <thead>
         <tr>
-          <th>Produto</th>
+          <th>Produtos</th>
           <th>Tipo</th>
           <th>Descricão</th>
           <th>Valor</th>
@@ -61,7 +61,7 @@ $todosProdutos = $produtos->todosProdutos();
         <td>
           <form action="excluir-produto.php" method="post">
             <input type="hidden" name="id" value="<?= $produto->getId() ?>">
-            <input type="button" class="botao-excluir" value="Excluir">
+            <input type="submit" class="botao-excluir" value="Excluir">
           </form>
         </td>
       </tr>
