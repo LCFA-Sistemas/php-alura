@@ -26,8 +26,8 @@ class ProdutoRepositorio
                 $cafe['tipo'],
                 $cafe['nome'],
                 $cafe['descricao'],
-                $cafe['imagem'],
-                $cafe['preco']);
+                $cafe['preco'],
+                $cafe['imagem']);
         },$produtosCafe);
 
         return $dadosCafe;
@@ -45,8 +45,8 @@ class ProdutoRepositorio
                 $almoco['tipo'],
                 $almoco['nome'],
                 $almoco['descricao'],
-                $almoco['imagem'],
-                $almoco['preco']);
+                $almoco['preco'],
+                $almoco['imagem']);
         },$produtosAlmoco);
 
         return $dadosAlmoco;
@@ -65,8 +65,8 @@ class ProdutoRepositorio
                 $produto['tipo'],
                 $produto['nome'],
                 $produto['descricao'],
-                $produto['imagem'],
-                $produto['preco']);
+                $produto['preco'],
+                $produto['imagem']);
         },$todosProdutos);
 
         return $todosDados;
@@ -78,6 +78,18 @@ class ProdutoRepositorio
         $statement = $this->pdo->prepare($slq);
         $statement->bindValue(1,$id);
 
+        $statement->execute();
+    }
+
+    public function adicionarProduto(Produto $produto)
+    {
+        $sql = "INSERT INTO produtos (tipo, nome, descricao, preco, imagem) VALUES(?,?,?,?,?)";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1,$produto->getTipo());
+        $statement->bindValue(2,$produto->getNome());
+        $statement->bindValue(3,$produto->getDescricao());
+        $statement->bindValue(4,$produto->getPreco());
+        $statement->bindValue(5,$produto->getImagem());
         $statement->execute();
     }
 }

@@ -4,21 +4,21 @@ namespace Modelo;
 
 class Produto
 {
-    private int $id;
+    private ?int $id;
     private string $tipo;
     private string $nome;
     private string $descricao;
-    private string $imagem;
     private string $preco;
+    private string $imagem;
 
-    public function __construct(int $id, string $tipo, string $nome, string $descricao, string $imagem, string $preco)
+    public function __construct(?int $id, string $tipo, string $nome, string $descricao,  string $preco, string $imagem = "logo-seranto.png")
     {
         $this->id = $id;
+        $this->tipo = $tipo;
+        $this->nome = $nome;
+        $this->descricao = $descricao;
         $this->preco = $preco;
         $this->imagem = $imagem;
-        $this->descricao = $descricao;
-        $this->nome = $nome;
-        $this->tipo = $tipo;
     }
 
     public function getId(): int
