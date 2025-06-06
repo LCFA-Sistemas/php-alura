@@ -9,8 +9,8 @@ use Repositorio\ProdutoRepositorio;
 
     if (isset($_POST['cadastro'])) {
     $produto = new Produto(null,
-        $_POST["tipo"],
         $_POST["nome"],
+        $_POST["tipo"],
         $_POST["descricao"],
         $_POST["preco"],
         $_POST["imagem"]);

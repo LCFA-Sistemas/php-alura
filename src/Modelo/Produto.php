@@ -11,11 +11,11 @@ class Produto
     private string $preco;
     private string $imagem;
 
-    public function __construct(?int $id, string $tipo, string $nome, string $descricao,  string $preco, string $imagem = "logo-seranto.png")
+    public function __construct(?int $id, string $nome, string $tipo, string $descricao,  string $preco, string $imagem = "logo-seranto.png")
     {
         $this->id = $id;
-        $this->tipo = $tipo;
         $this->nome = $nome;
+        $this->tipo = $tipo;
         $this->descricao = $descricao;
         $this->preco = $preco;
         $this->imagem = $imagem;
@@ -25,31 +25,24 @@ class Produto
     {
         return $this->id;
     }
-
-    public function getTipo(): string
-    {
-        return $this->tipo;
-    }
-
     public function getNome(): string
     {
         return $this->nome;
     }
-
+    public function getTipo(): string
+    {
+        return $this->tipo;
+    }
     public function getDescricao(): string
     {
         return $this->descricao;
     }
-
-    public function getImagem(): string
-    {
-        return $this->imagem;
-    }
-
     public function getPreco(): string
     {
         return $this->preco;
     }
-
-
+    public function getImagem(): string
+    {
+        return $this->imagem;
+    }
 }

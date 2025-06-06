@@ -1,3 +1,29 @@
+<?php
+use Modelo\Produto;
+use Repositorio\ProdutoRepositorio;
+
+require "src/conexao.php";
+require "src/Modelo/Produto.php";
+require "src/Repositorio/ProdutoRepositorio.php";
+
+$produtoRepositorio = new ProdutoRepositorio($pdo);
+$produto = $produtoRepositorio->buscarProduto($_GET['id']);
+
+if (isset($_POST['editar'])) {
+    $produto = new Produto($_GET['id'],
+        $_POST["nome"],
+        $_POST["tipo"],
+        $_POST["descricao"],
+        $_POST["preco"],
+        $_POST["imagem"]);
+
+    $produtoRepositorio->editarProduto($produto);
+
+    header('Location: admin.php');
+}
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -24,27 +50,27 @@
     <img class= "ornaments" src="img/ornaments-coffee.png" alt="ornaments">
   </section>
   <section class="container-form">
-    <form action="#">
+    <form method="post">
 
       <label for="nome">Nome</label>
-      <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
+      <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" value="<?= $produto->getNome() ?>" required>
 
       <div class="container-radio">
         <div>
             <label for="cafe">Café</label>
-            <input type="radio" id="cafe" name="tipo" value="Café" checked>
+            <input type="radio" id="cafe" name="tipo" value="Café" <?= $produto->getTipo() == 'Café' ? 'checked' : '' ?>>
         </div>
         <div>
             <label for="almoco">Almoço</label>
-            <input type="radio" id="almoco" name="tipo" value="Almoço">
+            <input type="radio" id="almoco" name="tipo" value="Almoço" <?= $produto->getTipo() == 'Almoço' ? 'checked' : '' ?>>
         </div>
     </div>
 
       <label for="descricao">Descrição</label>
-      <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" required>
+      <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" value="<?= $produto->getDescricao() ?>"required>
 
       <label for="preco">Preço</label>
-      <input type="text" id="preco" name="preco" placeholder="Digite uma descrição" required>
+      <input type="text" id="preco" name="preco" placeholder="Digite um preço" value="<?= $produto->getPreco() ?>"required>
 
       <label for="imagem">Envie uma imagem do produto</label>
       <input type="file" name="imagem" accept="image/*" id="imagem" placeholder="Envie uma imagem">
